@@ -160,7 +160,8 @@ pcr=cbind(samples=rownames(pcx),disease=group_list, pcx)
 ggplot(pcr, aes(PC1, PC2))+geom_point(size=5, aes(color=group_list)) +
   geom_text(aes(label=samples),hjust=-0.1, vjust=-0.3)
 
-ex_pca <- PCA(t(exps), graph = F)
+#方法二
+ex_pca <- PCA(t(exps), scale.unit = T, ncp = 2, graph = F)
 
 fviz_pca_ind(X = ex_pca, ## pca对象
              axes = 1:2, ## 展示的两个主成分
