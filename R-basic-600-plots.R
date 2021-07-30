@@ -1,11 +1,12 @@
 ###########
 ### Basic plot in R for biotrainee
 ### R语言基础绘图，注释工作由春卷完成
+### 生信技能树 http://www.biotrainee.com/ 基础入门练习
 ###########################
 #——————————————————————————————————————————————————————————————————————————
 # 1.字体大小
 # par(family = "STHeiti")
-plot(c(0:5), col = 'white')
+plot(c(0:5), col = 'black')
 text(2,4, labels = 'font=1:正常字体（默认）', font = 1)
 text(3,3, labels = 'font=2:粗体字体',font = 2)
 text(4,2,labels = 'font=3:斜体字体',font = 3)
@@ -98,7 +99,7 @@ text(6,1,labels = 'cex=1.5:放大1.5倍',cex=1.5)
 par(mar=c(0,0,0,0))   ## 空的，变成白板啦
 
 plot(1,col='white',xlim = c(1,9),ylim = c(1,7))
-plot(1,col='#D114F2',xlim = c(1,9),ylim = c(1,7)) # 习惯换成有颜色的
+plot(1,col='red',xlim = c(1,9),ylim = c(1,7)) # 习惯换成有颜色的
 
 ## 这是一个for循环
 for(i in 0:25){
