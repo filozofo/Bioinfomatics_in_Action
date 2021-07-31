@@ -18,7 +18,7 @@
 rm(list = ls())
 options(stringsAsFactors = F)
 Sys.setenv("LANGUAGE"="EN")
-setwd("C:\\Users\\aubot\\Documents\\code\\RWork\\LYM")
+setwd("C:/Users/aubot/Documents/code/r")
 library(DESeq2)
 library(tidyverse)
 tb <- read_delim("count_matrix.txt",delim="\t")  %>% column_to_rownames(var="gene")
