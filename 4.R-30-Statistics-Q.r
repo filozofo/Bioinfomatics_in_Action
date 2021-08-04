@@ -92,3 +92,45 @@ RNAseq_gl=colData(airway)[,3]
 table(RNAseq_gl)
 
 t.test(t(RNAseq_expr)~RNAseq_gl)
+# 表达矩阵相关
+
+## Q1: 把RNAseq_expr第一列全部加1后取log2后计算平均值和标准差
+
+tmp = map_chr(RNAseq_expr[,1],~log2(.x+1))
+RNAseq_expr_tb <- RNAseq_expr  %>%
+    as_tibble() %>% 
+    mutate(gene=rownames(RNAseq_expr),.before=1)
+
+RNAseq_expr_tb %>% 
+    mutate(SRR1039508=map_df(.[,2],~log2(.x+1))) %>% 
+    select(-1) %>% 
+    colMeans()
+
+
+RNAseq_expr_tb %>% 
+    mutate(SRR1039508=map_df(.[,2],~log2(.x+1))) %>% 
+    select(-1) %>% 
+    apply(2,sd)
+
+tmp=log2(RNAseq_expr[,1]+1)
+mean(tmp)
+sd(tmp)
+## Q2: 根据上一步得到平均值和标准差生成同样个数的随机的正态分布数值
+a = rnorm(n=length(RNAseq_expr[,1]),mean = 2.251721,sd = 3.64586)
+a=sort(a)
+plot(a)
+points(sort(tmp))
+## Q3: 删除RNAseq_expr第一列低于5的数据后，重复Q1和Q2
+
+m5 = RNAseq_expr[,1][RNAseq_expr[,1]>5]
+
+m6 = log2(m5+1)
+
+mean(m6)
+sd(m6)
+
+
+RNAseq_expr %>% head()
+RNAseq_expr %>% class()
+
+RNAseq_expr %>% head()
