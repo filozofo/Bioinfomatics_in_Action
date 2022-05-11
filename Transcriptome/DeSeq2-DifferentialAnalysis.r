@@ -16,14 +16,12 @@
 #另外，本考试为开卷，但是严格杜绝互相抄袭，如经查重发现有互相抄袭现象，抄袭者和被抄袭者均按零分处理。
 
 rm(list = ls())
-options(stringsAsFactors = F)
 Sys.setenv("LANGUAGE"="EN")
-setwd("C:/Users/aubot/Documents/code/r")
-library(DESeq2)
-library(tidyverse)
-tb <- read_delim("count_matrix.txt",delim="\t")  %>% column_to_rownames(var="gene")
+library(pacman)
+p_load(DESeq2,tidyverse,data.table)
+tb <- fread("count_matrix.txt",delim="\t")  %>% column_to_rownames(var="gene")
 ### 选取表达量在所有六个样本总和大于25的基因。
-tb %>% filter(if_all(1:6,~.x > 25))  %>% write_csv("express25.csv")
+tb %>% dplyr::filter(if_all(1:6,~.x > 25))  %>% fwrite("express25.csv")
 ### 使用R语言DESeq2软件包对这些基因进行基因差异表达分析
 coldata <- read_delim("samples.txt",delim="\t")
 
